@@ -34,8 +34,8 @@ export default function LoginPage() {
   const redirectPath = searchParams.get('redirect') || '/'; // Default redirect to home
 
   useEffect(() => {
-    // Fix: Use 'number' for browser-side setTimeout/setInterval return types instead of 'NodeJS.Timeout'
-    let timerInterval: number;
+    // Use 'any' to handle potential type mismatch between Node.js Timeout and browser number
+    let timerInterval: any;
     if (otpTimer > 0) {
       timerInterval = setInterval(() => {
         setOtpTimer(prev => prev - 1);
@@ -43,18 +43,22 @@ export default function LoginPage() {
     } else if (otpTimer === 0 && otpRequested) {
       setOtpError('OTP has expired. Please request a new one.');
     }
-    return () => clearInterval(timerInterval);
+    return () => {
+      if (timerInterval) clearInterval(timerInterval);
+    };
   }, [otpTimer, otpRequested]);
 
   useEffect(() => {
-    // Fix: Use 'number' for browser-side setTimeout/setInterval return types instead of 'NodeJS.Timeout'
-    let cooldownInterval: number;
+    // Use 'any' to handle potential type mismatch between Node.js Timeout and browser number
+    let cooldownInterval: any;
     if (resendCooldown > 0) {
       cooldownInterval = setInterval(() => {
         setResendCooldown(prev => prev - 1);
       }, 1000);
     }
-    return () => clearInterval(cooldownInterval);
+    return () => {
+      if (cooldownInterval) clearInterval(cooldownInterval);
+    };
   }, [resendCooldown]);
 
   const setAuthCookies = (token: string, role: string, userId: string, username: string) => {

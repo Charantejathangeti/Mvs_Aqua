@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/Button';
+import { WHATSAPP_OWNER_NUMBER } from '@/constants';
 
 export default function Home() {
   const products = [
@@ -98,7 +99,7 @@ export default function Home() {
             Our team is here to help you create the perfect aquatic environment.
           </p>
           <Link
-            href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_OWNER_NUMBER}?text=${encodeURIComponent('Hi Mvs_Aqua, I need some assistance with my aquarium.')}`}
+            href={`https://wa.me/${WHATSAPP_OWNER_NUMBER}?text=${encodeURIComponent('Hi Mvs_Aqua, I need some assistance with my aquarium.')}`}
             target="_blank"
             rel="noopener noreferrer"
           >

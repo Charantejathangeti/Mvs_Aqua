@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Cookies from 'js-cookie';
-import { AUTH_TOKEN_COOKIE_NAME, USER_ROLE_COOKIE_NAME } from '../constants';
+import { AUTH_TOKEN_COOKIE_NAME, USER_ROLE_COOKIE_NAME, WHATSAPP_OWNER_NUMBER } from '../constants';
 import { Role } from '../types';
 import { useRouter } from 'next/navigation';
 import Button from './Button';
@@ -56,7 +56,7 @@ const Header: React.FC = () => {
           )}
           
           <Link
-            href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_OWNER_NUMBER}`}
+            href={`https://wa.me/${WHATSAPP_OWNER_NUMBER}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors duration-200"

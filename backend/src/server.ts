@@ -4,15 +4,12 @@ import cors from 'cors';
 import authRoutes from './routes/auth';
 import adminInvoicingRoutes from './routes/admin/invoicing';
 import path from 'path';
-// Fix: Import `fileURLToPath` and `dirname` for ES module compatibility with __dirname
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
 dotenv.config();
 
-// Fix: Derive __dirname for ES Modules compatibility, as it might not be globally available depending on TypeScript/Node.js module configuration.
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -34,6 +31,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin/invoicing', adminInvoicingRoutes);
 
 // Serve static files for generated invoices
+// Assuming standard CommonJS setup where __dirname works
 app.use('/invoices', express.static(path.join(__dirname, '../invoices')));
 
 // Basic error handling middleware

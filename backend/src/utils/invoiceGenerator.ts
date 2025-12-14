@@ -2,13 +2,10 @@ import PDFDocument from 'pdfkit';
 import fs from 'fs';
 import path from 'path';
 import { InvoiceDetails } from '../types';
-// Fix: Import `fileURLToPath` and `dirname` for ES module compatibility with __dirname
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
-// Fix: Derive __dirname for ES Modules compatibility, as it might not be globally available depending on TypeScript/Node.js module configuration.
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 const INVOICES_DIR = path.join(__dirname, '../../invoices');
 if (!fs.existsSync(INVOICES_DIR)) {
